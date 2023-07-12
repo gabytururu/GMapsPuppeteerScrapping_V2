@@ -1,0 +1,16 @@
+{
+  "name": "googlemapsscrapping_reloaded",
+  "version": "1.0.0",
+  "description": "WebScrapping Practice with Puppeteer, scrapping gmaps only educational Purposes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "@soulboundavatar aka @gabytururu",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.0.1",
+    "puppeteer": "^20.8.1",
+    "xlsx": "^0.18.5"
+  }
+}
