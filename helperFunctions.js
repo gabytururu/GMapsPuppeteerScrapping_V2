@@ -21,26 +21,31 @@ const autoScroll = async(page, searchTerm) => {
     },searchTerm)
 }
 
-// const createLinksList = await page.evaluate((totalResults)=>{
-//     const dataCardsArr = document.querySelectorAll('a.hfpxzc')
-//     const urlsList = []
-//     dataCardsArr.forEach((card)=>{
-//         urlsList.push(element.href)
-//     })
-//     return urlsList.slice(0,totalResults)
-// },totalResults)
+const titleCase = (placeName)=>{
+    const lowerCase = placeName.toLowerCase()
+    const splitted = lowerCase.split(' ')                
+    let cleanUpArr=[]
+    for (let el of splitted){
+    const firstUpper = el[0].toUpperCase()
+    const restLower = el.slice(1).toLowerCase()
+    const fullName = firstUpper + restLower
+    cleanUpArr.push(fullName)
+    }
+    const titleCaseName = cleanUpArr.join(' ')                    
+    return titleCaseName 
+}
 
-const createLinksList = (totalResults) =>{
-    const dataCardsArr = document.querySelectorAll('a.hfpxzc')
-    const urlsList = []
-    dataCardsArr.forEach((card)=>{
-        urlsList.push(element.href)
-    })
-    return urlsList.slice(0,totalResults)
+const lowerCase = (placeName) =>{
+    let lowerCase = placeName.toLowerCase()
+    return lowerCase
 }
 
 
 module.exports = {
-    autoScroll,
-    createLinksList,
+    autoScroll: autoScroll,
+    titleCase: titleCase,
+    lowerCase: lowerCase,
+    
 }
+
+  
