@@ -21,4 +21,26 @@ const autoScroll = async(page, searchTerm) => {
     },searchTerm)
 }
 
-export default autoScroll
+// const createLinksList = await page.evaluate((totalResults)=>{
+//     const dataCardsArr = document.querySelectorAll('a.hfpxzc')
+//     const urlsList = []
+//     dataCardsArr.forEach((card)=>{
+//         urlsList.push(element.href)
+//     })
+//     return urlsList.slice(0,totalResults)
+// },totalResults)
+
+const createLinksList = (totalResults) =>{
+    const dataCardsArr = document.querySelectorAll('a.hfpxzc')
+    const urlsList = []
+    dataCardsArr.forEach((card)=>{
+        urlsList.push(element.href)
+    })
+    return urlsList.slice(0,totalResults)
+}
+
+
+module.exports = {
+    autoScroll,
+    createLinksList,
+}

@@ -1,9 +1,10 @@
 const puppeteer = require('puppeteer');
-const autoScroll = require('./helperFunctions')
+const helperFunctionsObj = require('./helperFunctions');
+
 
 (async()=>{
     let baseUrl = 'https://www.google.com/maps/search/atracci%C3%B3n+tur%C3%ADstica+en+Chiapas+OR+cascadas+en+Chiapas+OR+parque+nacional+en+chiapas/@17.2574412,-92.2388338,11z/data=!4m2!2m1!6e1?entry=ttu'
-    // let totalResults = 120
+    let totalResults = 120
     let searchTerm = 'atracción turística en Chiapas OR cascadas en Chiapas OR parque nacional en chiapas'
     // let typeOfPlace = 'Parque Ecoturístico'
     // let corePlace = 'chiapas'
@@ -17,6 +18,17 @@ const autoScroll = require('./helperFunctions')
     await page.setViewport({width:1300, height:900})
     await page.goto(`${baseUrl}`, {waitUntil: 'domcontentloaded'})
 
-    //autoScroll(page, searchTerm)
-    //await browser.close()
+    await helperFunctionsObj.autoScroll(page, searchTerm)
+    
+    const placesLinksList = await page.evaluate((totalResults)=>{
+        helperFunctionsObj.createLinksList(totalResults)
+    },totalResults)
+    
+
+    console.log('placesLinks', urlsList)
+    console.log('placesLinks Length', urlsList.length)
+
+
+
+    await browser.close()
 })()
