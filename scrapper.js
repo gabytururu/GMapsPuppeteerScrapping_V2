@@ -19,14 +19,30 @@ const helperFunctionsObj = require('./helperFunctions');
     await page.goto(`${baseUrl}`, {waitUntil: 'domcontentloaded'})
 
     await helperFunctionsObj.autoScroll(page, searchTerm)
-    
+        ///------------- newer version attempt ------------------//
     const placesLinksList = await page.evaluate((totalResults)=>{
         helperFunctionsObj.createLinksList(totalResults)
-    },totalResults)
+    },totalResults,helperFunctionsObj)
     
 
-    console.log('placesLinks', urlsList)
-    console.log('placesLinks Length', urlsList.length)
+    console.log('placesLinks', placesLinksList)
+    console.log('placesLinks Length', placesLinksList.length)
+
+
+      ///------------- original version attempt ------------------//
+    ///original version NOT working thus newer version either --> tips... creo q lo q no se completa es el scroll ... y por eso no pasa a la sig tarea?? verificar las condiciones para que acabe/retorne el scroll
+        // const createLinksList = await page.evaluate((totalResults)=>{
+        // const dataCardsArr = document.querySelectorAll('a.hfpxzc')
+        // const urlsList = []
+        // dataCardsArr.forEach((card)=>{
+        //     urlsList.push(element.href)
+        // })
+        // return urlsList.slice(0,totalResults)
+        // },totalResults)
+        // console.log('placesLinks', createLinksList)
+        // console.log('placesLinks Length', createLinksList.length)
+        
+
 
 
 

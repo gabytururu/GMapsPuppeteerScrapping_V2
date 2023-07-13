@@ -17,7 +17,7 @@ const autoScroll = async(page, searchTerm) => {
                     }
                 },100)
             })
-        }while(document.querySelector('.H1vSq') === null)
+        }while(document.querySelector('.HlvSq') === null)
     },searchTerm)
 }
 
