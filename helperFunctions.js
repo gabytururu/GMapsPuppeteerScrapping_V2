@@ -22,20 +22,21 @@ const autoScroll = async(page, searchTerm) => {
 }
 
 const titleCase = (placeName)=>{
-    const lowerCase = placeName.toLowerCase()
-    const splitted = lowerCase.split(' ')                
+    //const lowerCase = placeName.toLowerCase()
+    //const splitted = lowerCase.split(' ')                
+    const splitted = placeName.split(' ')                
     let cleanUpArr=[]
     for (let el of splitted){
-    const firstUpper = el[0].toUpperCase()
-    const restLower = el.slice(1).toLowerCase()
-    const fullName = firstUpper + restLower
-    cleanUpArr.push(fullName)
+        const firstUpper = el[0].toUpperCase()
+        const restLower = el.slice(1).toLowerCase()
+        const fullName = firstUpper + restLower
+        cleanUpArr.push(fullName)
     }
     const titleCaseName = cleanUpArr.join(' ')                    
     return titleCaseName 
 }
 
-const lowerCase = (placeName) =>{
+const lowerCase = async(placeName) =>{
     let lowerCase = placeName.toLowerCase()
     return lowerCase
 }
