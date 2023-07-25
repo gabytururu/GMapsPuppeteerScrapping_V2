@@ -75,82 +75,86 @@ const bothPhoneAndWebMissing = (array) =>{
 }
 
 
-const getPlaceDataInfo = (missingDataArray, placeData, dataSize, placeContacts) =>{
-
-    const {phone, web, address, city}  = infodelLugar
+const getPlaceDataInfo = (missingDataArray, placeData, dataSize,placeContacts) =>{
+    // console.log('la missing data es--->',missingDataArray)
+    // console.log('la placeData data es--->',placeData)
+    // console.log('la dataSize data es--->',dataSize)
+    // console.log('la placeContacts data es--->',placeContacts)
+    
+    let infodelLugar = {address:'datainicio', city:'datainicio', phone:'datainicio', web:'datainicio'}  
     
 
     if(placeData === null){
-        phone = 'No cuenta con teléfono'  
-        web = 'Web no disponible'              
-        address = 'No cuenta con dirección'
-        city = 'No cuenta con ciudad'
+        infodelLugar.phone = 'No cuenta con teléfono'  
+        infodelLugar.web = 'Web no disponible'              
+        infodelLugar.address = 'No cuenta con dirección'
+        infodelLugar.city = 'No cuenta con ciudad'
     }else if(bothPhoneAndWebMissing(missingDataArray) === true && dataSize === 1){
-        phone = 'No cuenta con teléfono'  
-        web = 'Web no disponible'   
-        address = placeData[0].textContent
-        city = 'No cuenta con ciudad'  
+        infodelLugar.phone = 'No cuenta con teléfono'  
+        infodelLugar.web = 'Web no disponible'   
+        infodelLugar.address = placeData[0].textContent
+        infodelLugar.city = 'No cuenta con ciudad'  
     }else if(bothPhoneAndWebMissing(missingDataArray) === true && dataSize === 2){
-        phone = 'No cuenta con teléfono'  
-        web = 'Web no disponible'              
-        address = placeData[0].textContent
-        city = placeData[1].textContent  
+        infodelLugar.phone = 'No cuenta con teléfono'  
+        infodelLugar.web = 'Web no disponible'              
+        infodelLugar.address = placeData[0].textContent
+        infodelLugar.city = placeData[1].textContent  
     }else if(bothPhoneAndWebMissing(missingDataArray) === true && dataSize > 2){
-        phone = 'No cuenta con teléfono'  
-        web = 'Web no disponible'              
-        address = placeData[0].textContent
-        city = placeData[1].textContent
+        infodelLugar.phone = 'No cuenta con teléfono'  
+        infodelLugar.web = 'Web no disponible'              
+        infodelLugar.address = placeData[0].textContent
+        infodelLugar.city = placeData[1].textContent
         //extra = document.querySelectorAll('.Io6YTe.fontBodyMedium')[2].textContent  
     }else if(bothPhoneAndWebMissing(missingDataArray) === false && onlyPhoneMissing(missingDataArray) === true && dataSize === 1){
-        phone = 'No cuenta con teléfono'  
-        web = placeContacts[0].href
-        address = placeData[0].textContent
-        city = 'No cuenta con ciudad'
+        infodelLugar.phone = 'No cuenta con teléfono'  
+        infodelLugar.web = placeContacts
+        infodelLugar.address = placeData[0].textContent
+        infodelLugar.city = 'No cuenta con ciudad'
     }else if(bothPhoneAndWebMissing(missingDataArray) === false && onlyPhoneMissing(missingDataArray)=== true && dataSize ===2){
-        phone = 'No cuenta con teléfono'
-        web = placeContacts[0].href
-        address = 'No cuenta con dirección'
-        city = placeData[0].textContent
+        infodelLugar.phone = 'No cuenta con teléfono'
+        infodelLugar.web = placeContacts
+        infodelLugar.address = 'No cuenta con dirección'
+        infodelLugar.city = placeData[0].textContent
     }else if(bothPhoneAndWebMissing(missingDataArray)===false && onlyPhoneMissing(missingDataArray)===true&&dataSize >2){
-        phone = 'No cuenta con teléfono'
-        web = placeContacts[0].href
-        address = placeData[0].textContent
-        city = placeData[2].textContent
+        infodelLugar.phone = 'No cuenta con teléfono'
+        infodelLugar.web = placeContacts
+        infodelLugar.address = placeData[0].textContent
+        infodelLugar.city = placeData[2].textContent
     }else if(bothPhoneAndWebMissing(missingDataArray)=== false && onlyWebMissing(missingDataArray) === true && dataSize === 1){
-        phone = placeData[0].textContent
-        web = 'Web no disponible' 
-        address = 'No cuenta con dirección'
-        city = 'No cuenta con ciudad'
-    }else if(bothPhAndWebMissing(missingDataArr)===false && onlyWebMissing(missingDataArr) === true && dataSize === 2){
-        phone = placeData[1].textContent
-        web = 'Web no disponible' 
-        address = placeData[0].textContent
-        city = 'No cuenta con ciudad'
-    }else if(bothPhAndWebMissing(missingDataArr)===false && onlyWebMissing(missingDataArr) === true && dataSize > 2){
-        phone = placeData[1].textContent
-        web = 'Web no disponible' 
-        address = placeData[0].textContent
-        city = placeData[2].textContent
-    }else if(onlyWebMissing(missingDataArr) === false && onlyPhoneMissing(missingDataArr) === false && dataSize === 2){
-        phone = placeData[1].textContent
-        web = placeContacts[0].href
-        address = 'No cuenta con dirección'
-        city = 'No cuenta con ciudad'
-    }else if(onlyWebMissing(missingDataArr) === false && onlyPhoneMissing(missingDataArr) === false && dataSize === 3){
-        phone = placeData[2].textContent
-        web = placeContacts[0].href
-        address = placeData[0].textContent
-        city = 'No cuenta con ciudad'
-    }else if(onlyWebMissing(missingDataArr) === false && onlyPhoneMissing(missingDataArr) === false && dataSize >= 4){
-        phone = placeData[2].textContent
-        web = placeContacts[0].href
-        address = placeData[0].textContent
-        city = placeData[3].textContent   
+        infodelLugar.phone = placeData[0].textContent
+        infodelLugar.web = 'Web no disponible' 
+        infodelLugar.address = 'No cuenta con dirección'
+        infodelLugar.city = 'No cuenta con ciudad'
+    }else if(bothPhoneAndWebMissing(missingDataArray)===false && onlyWebMissing(missingDataArray) === true && dataSize === 2){
+        infodelLugar.phone = placeData[1].textContent
+        infodelLugar.web = 'Web no disponible' 
+        infodelLugar.address = placeData[0].textContent
+        infodelLugar.city = 'No cuenta con ciudad'
+    }else if(bothPhoneAndWebMissing(missingDataArray)===false && onlyWebMissing(missingDataArray) === true && dataSize > 2){
+        infodelLugar.phone = placeData[1].textContent
+        infodelLugar.web = 'Web no disponible' 
+        infodelLugar.address = placeData[0].textContent
+        infodelLugar.city = placeData[2].textContent
+    }else if(onlyWebMissing(missingDataArray) === false && onlyPhoneMissing(missingDataArray) === false && dataSize === 2){
+        infodelLugar.phone = placeData[1].textContent
+        infodelLugar.web = placeContacts
+        infodelLugar.address = 'No cuenta con dirección'
+        infodelLugar.city = 'No cuenta con ciudad'
+    }else if(onlyWebMissing(missingDataArray) === false && onlyPhoneMissing(missingDataArray) === false && dataSize === 3){
+        infodelLugar.phone = placeData[2].textContentae
+        infodelLugar.web = placeContacts
+        infodelLugar.address = placeData[0].textContent
+        infodelLugar.city = 'No cuenta con ciudad'
+    }else if(onlyWebMissing(missingDataArray) === false && onlyPhoneMissing(missingDataArray) === false && dataSize >= 4){
+        infodelLugar.phone = placeData[2].textContent
+        infodelLugar.web = placeContacts
+        infodelLugar.address = placeData[0].textContent
+        infodelLugar.city = placeData[3].textContent   
     }else{
-        phone = 'caso excepcional revisar caso'
-        web = 'caso excepcional revisar caso'
-        address = 'caso excepcional revisar caso'
-        city = 'caso excepcional revisar caso' 
+        infodelLugar.phone = 'caso excepcional revisar caso'
+        infodelLugar.web = 'caso excepcional revisar caso'
+        infodelLugar.address = 'caso excepcional revisar caso'
+        infodelLugar.city = 'caso excepcional revisar caso' 
     }
     return infodelLugar
 }
