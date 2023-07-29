@@ -64,10 +64,11 @@ const {autoScroll, titleCase, lowerCase, onlyPhoneMissing,onlyWebMissing, bothPh
 
             const placeData = document.querySelectorAll('.Io6YTe.fontBodyMedium')
             const dataSize = document.querySelectorAll('.Io6YTe.fontBodyMedium').length
+           // const placeContacts = document.querySelectorAll('a.CsEnBe')[0].hostname
             const placeContacts = document.querySelectorAll('a.CsEnBe')[0].hostname
             
             // placeInfo.contacts = getPlaceDataInfo( missingDataArray, placeData, dataSize, placeContacts)
-            placeInfo.contacts = await getPlaceDataInfo( missingDataArray, placeData,dataSize, placeContacts)
+            placeInfo.contacts = await getPlaceDataInfo( missingDataArray, placeData, dataSize, placeContacts)
             placeInfo.originalName = document.querySelector('h1.DUwDvf.lfPIob').textContent         
             placeInfo.lowerCaseName = await lowerCase(placeInfo.originalName)
             placeInfo.titleCaseName = await titleCase(placeInfo.originalName)  
