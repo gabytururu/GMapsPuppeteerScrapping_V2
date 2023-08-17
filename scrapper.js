@@ -64,25 +64,66 @@ const {autoScroll, titleCase, lowerCase, onlyPhoneMissing,onlyWebMissing, bothPh
 
             const placeData = document.querySelectorAll('.Io6YTe.fontBodyMedium')
             const dataSize = document.querySelectorAll('.Io6YTe.fontBodyMedium').length
-           // const placeContacts = document.querySelectorAll('a.CsEnBe')[0].hostname
             const placeContacts = document.querySelectorAll('a.CsEnBe')[0].hostname
             
-            // placeInfo.contacts = getPlaceDataInfo( missingDataArray, placeData, dataSize, placeContacts)
-            placeInfo.contacts = await getPlaceDataInfo( missingDataArray, placeData, dataSize, placeContacts)
+            //----------------------------------------------------//
+            
+            let infodelLugar = {address:'datainicio', city:'datainicio', phone:'datainicio', web:'datainicio'} 
+            if(placeData === null){      
+                console.log('cayo en caso 0 : null')  
+                infodelLugar.phone= 'No cuenta con teléfono'  
+                infodelLugar.web= 'Web no disponible'            
+                infodelLugar.address= 'No cuenta con dirección'
+                infodelLugar.city= 'No cuenta con ciudad'     
+               
+            }else if(await bothPhoneAndWebMissing(missingDataArray) === true && dataSize === 1){
+                console.log('cayo en caso 1 : bothph&web size =1')  
+                infodelLugar.phone = 'No cuenta con teléfono'  
+                infodelLugar.web = 'Web no disponible'  
+                infodelLugar.address = placeData ? placeData[0].textContent : ' no hubo address',
+                infodelLugar.city = 'No cuenta con ciudad'
+                
+            }else if(await bothPhoneAndWebMissing(missingDataArray) === true && dataSize === 2){
+                console.log('cayo en caso 2 : bothph&web size =2') 
+                    infodelLugar.phone = 'No cuenta con teléfono'  
+                    infodelLugar.web = 'Web no disponible'              
+                    infodelLugar.address = placeData ? placeData[0].textContent : 'no hubo address'
+                    infodelLugar.city = placeData? placeData[1].textContent  : 'no hubo city'
+               
+            }else if(await bothPhoneAndWebMissing(missingDataArray) === true && dataSize > 2){
+                console.log('cayo en caso 3 : bothph&web size >2') 
+                infodelLugar.phone = 'No cuenta con teléfono'
+                infodelLugar.web= 'Web no disponible'            
+                infodelLugar.address = placeData ? placeData[0].textContent : 'no hubo address'
+                infodelLugar.city = placeData ? placeData[1].textContent : 'no hubo city'  
+            }else{
+                console.log('cayo en caso 4 : caso excepcional') 
+                infodelLugar.phone = 'caso excepcional revisar caso'
+                infodelLugar.web = 'caso excepcional revisar caso'
+                infodelLugar.address = 'caso excepcional revisar caso'
+                infodelLugar.city = 'caso excepcional revisar caso' 
+            }
+
+
+
+            //---------------------------------------------------//
+            // placeInfo.contacts =  await getPlaceDataInfo( missingDataArray, placeData, dataSize, placeContacts)
+            placeInfo.contacts =  infodelLugar
             placeInfo.originalName = document.querySelector('h1.DUwDvf.lfPIob').textContent         
             placeInfo.lowerCaseName = await lowerCase(placeInfo.originalName)
             placeInfo.titleCaseName = await titleCase(placeInfo.originalName)  
 
+            console.log('consologeando placeInfo',placeInfo)
             return placeInfo
         },typeOfPlace,corePlace,acct, targetWebsite,slug)
 
             acct++
             placesData.push({acct, ...placeSpecifics})
-            console.log(placeSpecifics)
+            console.log('consologeando place specifics',placeSpecifics)
     }
     
-    console.log('placesData:', placesData)
-    console.log('placesData Lengt:', placesData.length)
+    console.log('consologeando placesData:', placesData)
+    console.log('consologeando placesData Length:', placesData.length)
 
     await browser.close()
 })()

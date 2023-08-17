@@ -80,40 +80,38 @@ const getPlaceDataInfo = (missingDataArray, placeData, dataSize, placeContacts) 
     // console.log('la placeData data es--->',placeData)
     // console.log('la dataSize data es--->',dataSize)
     // console.log('la placeContacts data es--->',placeContacts)
-    
-   
 
     let infodelLugar = {address:'datainicio', city:'datainicio', phone:'datainicio', web:'datainicio'}  
-    console.log(placeData)
+    //console.log('consologeando placedata pasada como param a la funcion',placeData)
 
-    if(placeData === null){
-        return console.log({
-            phone : 'No cuenta con teléfono',  
-            web : 'Web no disponible',              
-            address : 'No cuenta con dirección',
-            city : 'No cuenta con ciudad',
-        })
+    if(placeData === null){      
+        console.log('cayo en caso 0 : null')  
+        infodelLugar.phone= 'No cuenta con teléfono'  
+        infodelLugar.web= 'Web no disponible'            
+        infodelLugar.address= 'No cuenta con dirección'
+        infodelLugar.city= 'No cuenta con ciudad'     
+       
     }else if(bothPhoneAndWebMissing(missingDataArray) === true && dataSize === 1){
-        return console.log({
-            phone : 'No cuenta con teléfono',  
-            web : 'Web no disponible',   
-            address : placeData ? placeData[0].textContent : ' no hubo address',
-            city : 'No cuenta con ciudad', 
-        }) 
+        console.log('cayo en caso 1 : bothph&web size =1')  
+        infodelLugar.phone = 'No cuenta con teléfono'  
+        infodelLugar.web = 'Web no disponible'  
+        infodelLugar.address = placeData ? placeData[0].textContent : ' no hubo address',
+        infodelLugar.city = 'No cuenta con ciudad'
+        
     }else if(bothPhoneAndWebMissing(missingDataArray) === true && dataSize === 2){
-        return console.log({
-            phone : 'No cuenta con teléfono',  
-            web : 'Web no disponible',              
-            address : placeData ? placeData[0].textContent : 'no hubo address',
-            city : placeData? placeData[1].textContent  : 'no hubo city',
-        })
+        console.log('cayo en caso 2 : bothph&web size =2') 
+            infodelLugar.phone = 'No cuenta con teléfono'  
+            infodelLugar.web = 'Web no disponible'              
+            infodelLugar.address = placeData ? placeData[0].textContent : 'no hubo address'
+            infodelLugar.city = placeData? placeData[1].textContent  : 'no hubo city'
+       
     }else if(bothPhoneAndWebMissing(missingDataArray) === true && dataSize > 2){
-        return console.log({
-            phone : 'No cuenta con teléfono',  
-            web: 'Web no disponible',              
-            address : placeData ? placeData[0].textContent : 'no hubo address',
-            city : placeData ? placeData[1].textContent : 'no hubo city'  
-            } )     
+        console.log('cayo en caso 3 : bothph&web size >2') 
+            infodelLugar.phone = 'No cuenta con teléfono'
+            infodelLugar.web= 'Web no disponible'            
+            infodelLugar.address = placeData ? placeData[0].textContent : 'no hubo address'
+            infodelLugar.city = placeData ? placeData[1].textContent : 'no hubo city'  
+      
     //     //extra = document.querySelectorAll('.Io6YTe.fontBodyMedium')[2].textContent  
     // }else if(bothPhoneAndWebMissing(missingDataArray) === false && onlyPhoneMissing(missingDataArray) === true && dataSize === 1){
     //     infodelLugar.phone = 'No cuenta con teléfono'  
@@ -161,15 +159,15 @@ const getPlaceDataInfo = (missingDataArray, placeData, dataSize, placeContacts) 
     //     infodelLugar.address = placeData[0].textContent
     //     infodelLugar.city = placeData[3].textContent   
     }else{
+        console.log('cayo en caso 4 : caso excepcional') 
         infodelLugar.phone = 'caso excepcional revisar caso'
         infodelLugar.web = 'caso excepcional revisar caso'
         infodelLugar.address = 'caso excepcional revisar caso'
         infodelLugar.city = 'caso excepcional revisar caso' 
     }
+    console.log(infodelLugar)
     return infodelLugar
 }
-
-
 
 module.exports = {
     autoScroll,
